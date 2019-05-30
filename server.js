@@ -1,22 +1,15 @@
 var express = require('express');
 var app = express();
-var csv= require('csvtojson');
-var csvFilePath='./crude999.csv';
-var KiteConnect = require("./connect.js");
 var jsonArray;
-var api_key = "vlu1o53tt1makdu3",
-    secret = "t45f9mr9r3jvbkgyg423hf5il90399el";
 var access_token = '';
 var bodyParser = require('body-parser');
+var fs = require("fs");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
       
 
-var options = {
-            "api_key": api_key,
-            "debug": false
-        };
+
 
 var expressWs = require('express-ws')(app);
 
@@ -31,79 +24,71 @@ var expressWs = require('express-ws')(app);
 
 app.post('/ashu', function (req, res) {
 
-console.log(req.body);
+fs.appendFile('temp.txt', JSON.stringify(req.body) , function(err){
 
-   var kc = new KiteConnect(options);
-   var access_token_const = '';
+  if(err){
 
-    if (!access_token) {
-            kc.generateSession(req.body.token, secret)
-                .then(function(response) {
-
-                   
-                    access_token_const = response.access_token;
-
-                    console.log('acess token const' + access_token_const);
-                   
-                   
-                    kc.setAccessToken(access_token_const);
+   console.log(err);
+  }
+  else{
+    console.log('successfully written to file');
+  }
 
 
-                    res.send(access_token_const);
-                                   
 
-                })
-                .catch(function(err) {
-                   
-                    console.log(err);
 
-                })
-        } else {
-            alert('else');
-            kc.setAccessToken(access_token);
-
-    }
- //res.status(400).send("unable to save to database");
-
-   /*res.status(200).send({
-            access_token: access_token_const
-          });*/
+})
 
      
   
+});
+
+
+app.post('/bonu', function (req, res) {
+
+fs.appendFile('temp1.txt', JSON.stringify(req.body) , function(err){
+
+  if(err){
+
+   console.log(err);
+  }
+  else{
+    console.log('successfully written to file');
+  }
+
+
+
+
 })
 
-
-
-app.ws('/echo', function(ws, req) {
-  ws.on('message', function(msg) {
-      let data  = JSON.stringify(jsonArray);
-      ws.send(data);
-  });
+     
+  
 });
 
 
-csv()
-.fromFile(csvFilePath)
-.then((jsonObj)=>{
-  //  console.log(jsonObj);
-    jsonArray = jsonObj;
-    
+app.post('/sonu', function (req, res) {
+
+fs.appendFile('temp2.txt', JSON.stringify(req.body) , function(err){
+
+  if(err){
+
+   console.log(err);
+  }
+  else{
+    console.log('successfully written to file');
+  }
+
 })
-
-//const jsonArray=await csv().fromFile(csvFilePath);
-
-app.get('/' , function(req,res){
-res.send(jsonArray);
+  
 });
 
-var router = express.Router();
-app.use('/api' , router);
 
-router.get('/:date' , function(req, res){
-  var empName = req.params.date;
 
-});
+
+
+
+
+
 
 
 app.listen(4000, function(){

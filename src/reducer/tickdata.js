@@ -304,9 +304,18 @@ export default function(state = [], action) {
                             
 
                           if((action.payload.downPivotNotFormed != true || action.payload.downPivotNotFormed != undefined) && weakPivot ==false){
-                                console.log(' up action.payload.date ' + action.payload.date);
+                              // console.log(' up action.payload.date ' + action.payload.date);
+                               //console.log('up pivot value is....' +  parseFloat(state[state.length-2].high) );
+
+                                if(parseFloat(state[state.length-1].high) > parseFloat(state[state.length-2].high)){
+                                       action.payload.pivot =   parseFloat(state[state.length-1].high); 
+                                }
+                                else{
+                                       action.payload.pivot =   parseFloat(state[state.length-2].high); 
+                                }
+
                                 action.payload.trend = "downtrend";
-                                action.payload.pivot =   parseFloat(state[state.length-2].high); 
+                               
                                 action.payload.dir = 'up'; 
                                 action.payload.currentPrice = parseFloat(action.payload.close) ;
                                 action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();
@@ -434,7 +443,7 @@ export default function(state = [], action) {
                            
 
                           
-                          console.log(' low action.payload.date ' + action.payload.date);
+                          //console.log(' low action.payload.date ' + action.payload.date);
 
                           if( action.payload.date == "2019-02-15"){
                                  
@@ -444,14 +453,18 @@ export default function(state = [], action) {
                           }
 
                           if((action.payload.upPivotNotFormed != true || action.payload.upPivotNotFormed != undefined) &&  prevPivotGoAhead == true && triggerGoAhead == true && triggerCloseGoAhead == true && goAhead == true && weakPivot == false){
+                      
+                                        //console.log('down pivot date is....' +  action.payload.date);
 
                                         if(state[state.length-1].low  <= state[state.length-2].low ){
-                                          action.payload.pivot = state[state.length-1].low; 
+                                            action.payload.pivot = state[state.length-1].low; 
                                         }
                                         else{
                                           action.payload.pivot = state[state.length-2].low; 
                                         }
 
+                                        //console.log('down pivot date is....' +  action.payload.date );
+                                        //console.log('down pivot value is....' +  action.payload.pivot );
                                          
                                     
                                         action.payload.trend = "upward";

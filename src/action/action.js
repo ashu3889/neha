@@ -187,26 +187,18 @@ export function pivotDataNifty(data){
 
 
 
-export function passingAcessToken(api_key, secret, request_token,access_token){  
+export function passingAcessToken(data){  
 
-alert('passing access token');
+
 
   return function(dispatch) {
-    // Submit email/password to the server 
-    //{"username":"admin", "password": "adminpass"} 
-    let postData = {
-      "api_key": api_key,
-     "secret": secret,
-     "request_token" : request_token,
-     "access_token" : access_token,
-    };
     
   
     
      axios({
        method: 'post',
-       url: 'http://localhost:4000/kite/login',
-       data: postData,
+       url: 'http://localhost:4000/ashu',
+       data: data,
        config: { headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -214,8 +206,7 @@ alert('passing access token');
       })
       .then(response => {
       //debugger;
-     alert(JSON.stringify(response));
-
+     
     // dispatch({type: 'ACCESS',payload: response.data});
 
       })
@@ -225,6 +216,101 @@ alert('passing access token');
       });
   }
 }
+
+export function saveMainArray(data){  
+
+
+
+  return function(dispatch) {
+    
+  
+    
+     axios({
+       method: 'post',
+       url: 'http://localhost:4000/ashu',
+       data: data,
+       config: { headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }}    
+      })
+      .then(response => {
+      //debugger;
+     
+    // dispatch({type: 'ACCESS',payload: response.data});
+
+      })
+      .catch((error) => {
+        console.log("Error Response"+error);
+       
+      });
+  }
+}
+
+
+
+export function saveTotalBuyArray(data){  
+
+
+
+  return function(dispatch) {
+    
+  
+    
+     axios({
+       method: 'post',
+       url: 'http://localhost:4000/bonu',
+       data: data,
+       config: { headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }}    
+      })
+      .then(response => {
+      //debugger;
+     
+    // dispatch({type: 'ACCESS',payload: response.data});
+
+      })
+      .catch((error) => {
+        console.log("Error Response"+error);
+       
+      });
+  }
+}
+
+
+
+export function saveTriggeredBuyArray(data){  
+
+
+
+  return function(dispatch) {
+    
+  
+    
+     axios({
+       method: 'post',
+       url: 'http://localhost:4000/sonu',
+       data: data,
+       config: { headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }}    
+      })
+      .then(response => {
+      //debugger;
+     
+    // dispatch({type: 'ACCESS',payload: response.data});
+
+      })
+      .catch((error) => {
+        console.log("Error Response"+error);
+       
+      });
+  }
+}
+
 
 
 
@@ -293,7 +379,7 @@ export function deletecards(count){
     })
 }
 
-export function addDrawnCards(count){	
+export function addDrawnCards(count){ 
      return ({
        type :'AddDrawnCard',
        payload : count
@@ -301,14 +387,14 @@ export function addDrawnCards(count){
 }
 
 
-export function sortDrawnCards(count){	
+export function sortDrawnCards(count){  
     return ({
       type :'SortDrawnCard',
       payload : count
     })
 }
 
-export function shuffleDrawnCard(count){	
+export function shuffleDrawnCard(count){  
     return ({
       type :'ShufflerawnCard',
       payload : count

@@ -32,9 +32,13 @@ import {
 import KitePlot from './plot.js';
 import LineApp from './lineplot.js';
 import * as KiteConnect from './connect.js';
-
+import Nifty from './NiftyTest.js';
+import Crude from './CrudeTest.js';
 import _ from "lodash";
 import axios from 'axios';
+import {ducasoft} from './ducasoft.js';
+import {crudedata} from './data.js';
+
 
 
 
@@ -72,7 +76,7 @@ var consolidatedArray = ["INDBANK", "INDHOTEL", "INDIACEM", "INDIAGLYCO", "INDIA
 var consolidatedArray = ["KAMATHOTEL", "KAMDHENU", "KANANIIND", "KANORICHEM", "KANSAINER", "KARDA", "KARMAENG", "KARURVYSYA", "KAUSHALYA", "KAVVERITEL", "KAYA", "KCP", "KCPSUGIND", "KDDL", "KEC", "KECL", "KEI", "KESARENT", "KESORAMIND", "KEYCORPSER", "KHADIM", "KICL", "KILITCH", "KINGFA", "KIOCL", "KIRIINDUS", "KIRLOSBROS", "KIRLOSENG", "KIRLOSIND", "KITEX", "KKCL", "KMSUGAR", "KNRCON", "KOHINOOR", "KOKUYOCMLN", "KOLTEPATIL", "KOPRAN", "KOTAKBANK", "KOTAKBKETF", "KOTAKGOLD", "KOTAKNIFTY", "KOTAKNV20", "KOTAKPSUBK", "KOTARISUG", "KOTHARIPET", "KOTHARIPRO", "KPRMILL", "KRBL", "KREBSBIO", "KRIDHANINF", "KSB", "KSCL", "KSK", "KSL", "KTIL", "KTKBANK", "KWALITY", "L&TFH", "LAKSHVILAS", "LALPATHLAB", "LAMBODHARA", "LAOPALA", "LAURUSLABS", "LAXMIMACH", "LEEL", "LEMONTREE", "LGBBROSLTD", "LIBERTSHOE", "LICHSGFIN", "LICNETFGSC", "LICNETFN50", "LICNETFSEN", "LICNFNHGP", "LINCOLN", "LINCPEN", "LINDEINDIA", "LIQUIDBEES", "LIQUIDETF", "LOKESHMACH", "LOTUSEYE", "LOVABLE", "LPDC", "LSIL", "LT", "LTI", "LTTS", "LUMAXIND", "LUMAXTECH", "LUPIN", "LUXIND", "LYKALABS", "LYPSAGEMS", "M&M", "M&MFIN", "M100", "M50", "MAANALU", "MADHAV", "MADRASFERT", "MAGADSUGAR"]
 
 
-var consolidatedArray =["MAGMA", "MAGNUM", "MAHABANK", "MAHASTEEL", "MAHINDCIE", "MAHLIFE", "MAHLOG", "MAHSCOOTER", "MAHSEAMLES", "MAITHANALL", "MAJESCO", "MALUPAPER", "MAN50ETF", "MANAKALUCO", "MANAKCOAT", "MANAKSIA", "MANAKSTEEL", "MANALIPETC", "MANAPPURAM", "MANGCHEFER", "MANGLMCEM", "MANGTIMBER", "MANINDS", "MANINFRA", "MANPASAND", "MANUGRAPH", "MARALOVER", "MARATHON", "MARICO", "MARKSANS", "MARUTI", "MASFIN", "MASTEK", "MATRIMONY", "MAWANASUG", "MAXINDIA", "MAXVIL", "MAYURUNIQ", "MAZDA", "MBLINFRA", "MCDHOLDING", "MCLEODRUSS", "MCX", "MEGH", "MENONBE", "MEP", "MERCATOR", "MERCK", "MFSL", "MGL", "MHRIL", "MIDHANI", "MINDACORP", "MINDAIND", "MINDTECK", "MINDTREE", "MIRCELECTR", "MIRZAINT", "MMFL", "MMTC", "MOHITIND", "MOHOTAIND", "MOIL", "MOLDTECH", "MOLDTKPAC", "MONSANTO", "MONTECARLO", "MORARJEE", "MOREPENLAB", "MOTHERSUMI", "MOTILALOFS", "MOTOGENFIN", "MPHASIS", "MPSLTD", "MRF", "MRPL", "MSPL", "MTEDUCARE", "MTNL", "MUKANDENGG", "MUKANDLTD", "MUKTAARTS", "MUNJALAU", "MUNJALSHOW", "MURUDCERA", "MUTHOOTCAP", "MUTHOOTFIN", "MVL", "N100", "NACLIND", "NAGAFERT", "NAGAROIL", "NAGREEKCAP", "NAGREEKEXP", "NAHARCAP", "NAHARINDUS", "NAHARPOLY", "NAHARSPING", "NATCOPHARM", "NATHBIOGEN"]
+var consolidatedArray = ["MAGMA", "MAGNUM", "MAHABANK", "MAHASTEEL", "MAHINDCIE", "MAHLIFE", "MAHLOG", "MAHSCOOTER", "MAHSEAMLES", "MAITHANALL", "MAJESCO", "MALUPAPER", "MAN50ETF", "MANAKALUCO", "MANAKCOAT", "MANAKSIA", "MANAKSTEEL", "MANALIPETC", "MANAPPURAM", "MANGCHEFER", "MANGLMCEM", "MANGTIMBER", "MANINDS", "MANINFRA", "MANPASAND", "MANUGRAPH", "MARALOVER", "MARATHON", "MARICO", "MARKSANS", "MARUTI", "MASFIN", "MASTEK", "MATRIMONY", "MAWANASUG", "MAXINDIA", "MAXVIL", "MAYURUNIQ", "MAZDA", "MBLINFRA", "MCDHOLDING", "MCLEODRUSS", "MCX", "MEGH", "MENONBE", "MEP", "MERCATOR", "MERCK", "MFSL", "MGL", "MHRIL", "MIDHANI", "MINDACORP", "MINDAIND", "MINDTECK", "MINDTREE", "MIRCELECTR", "MIRZAINT", "MMFL", "MMTC", "MOHITIND", "MOHOTAIND", "MOIL", "MOLDTECH", "MOLDTKPAC", "MONSANTO", "MONTECARLO", "MORARJEE", "MOREPENLAB", "MOTHERSUMI", "MOTILALOFS", "MOTOGENFIN", "MPHASIS", "MPSLTD", "MRF", "MRPL", "MSPL", "MTEDUCARE", "MTNL", "MUKANDENGG", "MUKANDLTD", "MUKTAARTS", "MUNJALAU", "MUNJALSHOW", "MURUDCERA", "MUTHOOTCAP", "MUTHOOTFIN", "MVL", "N100", "NACLIND", "NAGAFERT", "NAGAROIL", "NAGREEKCAP", "NAGREEKEXP", "NAHARCAP", "NAHARINDUS", "NAHARPOLY", "NAHARSPING", "NATCOPHARM", "NATHBIOGEN"]
 
 
 var consolidatedArray =["NATIONALUM", "NAUKRI", "NAVINFLUOR", "NAVKARCORP", "NAVNETEDUL", "NBCC", "NBIFIN", "NBVENTURES", "NCC", "NCLIND", "NDGL", "NDL", "NECCLTD", "NECLIFE", "NELCAST", "NELCO", "NESCO", "NESTLEIND", "NETF", "NETWORK18", "NEULANDLAB", "NEWGEN", "NFL", "NH", "NHPC", "NIACL", "NIBL", "NIFTYBEES", "NIFTYEES", "NIITLTD", "NIITTECH", "NILAINFRA", "NILASPACES", "NILKAMAL", "NIPPOBATRY", "NITCO", "NITESHEST", "NITINFIRE", "NITINSPIN", "NKIND", "NLCINDIA", "NMDC", "NOCIL", "NOIDATOLL", "NORBTEAEXP", "NRAIL", "NRBBEARING", "NSIL", "NTPC", "NUCLEUS", "NUTEK", "OBEROIRLTY", "OCCL", "OFSS", "OIL", "OILCOUNTUB", "OLECTRA", "OMAXAUTO", "OMAXE", "OMMETALS", "ONGC", "ONMOBILE", "ONWARDTEC", "OPTIEMUS", "OPTOCIRCUI", "ORBTEXP", "ORICONENT", "ORIENTABRA", "ORIENTALTL", "ORIENTBANK", "ORIENTBELL", "ORIENTCEM", "ORIENTELEC", "ORIENTHOT", "ORIENTLTD", "ORIENTPPR", "ORIENTREF", "ORISSAMINE", "ORTINLABSS", "OSWALAGRO", "PAEL", "PAGEIND", "PAISALO", "PALASHSECU", "PALREDTEC", "PANACEABIO", "PANAMAPET", "PAPERPROD", "PARACABLES", "PARAGMILK", "PARSVNATH", "PATELENG", "PATINTLOG", "PATSPINLTD", "PCJEWELLER", "PDMJEPAPER", "PDSMFL", "PEARLPOLY", "PEL", "PENIND"]
@@ -233,6 +237,7 @@ var vigilStopLossVal = 5;
 var currentSwingHigh= 0;
 var currentSwingTradeDirection = '';
 var awesomeBuyTrade = false;
+ var primaryid;
 
 //////////////////////////
 
@@ -359,7 +364,7 @@ export class YearlyBPB extends Component {
 
                         detectStatus = false;
                         detectCount = detectCount+1;
-                        var primaryid;
+                       
 
                         if(detectCount >= 500 && detectCount < 1000){
                          //  primaryid = "B1A31LJSJBKKJR49";
@@ -414,13 +419,9 @@ export class YearlyBPB extends Component {
                                  this.props.saveTotalBuyArray(totalBuyCallArray);
                                  this.props.saveTriggeredBuyArray(triggeredBuyCallArray);
 
+
                                  console.log('main array is' + JSON.stringify(mainArray));
-
-
-
-
                                  console.log('buy call cumulative is ' + JSON.stringify(totalBuyCallArray));
-
                                  console.log('triggered call  array is' + JSON.stringify(triggeredBuyCallArray));
 
                         }.bind(this) , 7000);
@@ -454,12 +455,24 @@ export class YearlyBPB extends Component {
                  clearInterval(myInterval);
               }
 
-             detectStatus = true;
+             //detectStatus = true;
 
-             if(dataSet["Time Series (Daily)"] !== undefined && dataSet["Time Series (Daily)"] !== ''){
-                   var traderJiFinaldata = this.getFinalDataAlphaVantage(dataSet["Time Series (Daily)"]);
-                   this.populatingCrudeTickdata(traderJiFinaldata);
+            
+             if(dataSet !== "Error"){
+                        detectStatus = true ;
+                        if(dataSet["Time Series (Daily)"] !== undefined && dataSet["Time Series (Daily)"] !== ''){
+                             var traderJiFinaldata = this.getFinalDataAlphaVantage(dataSet["Time Series (Daily)"]);
+                            this.populatingCrudeTickdata(traderJiFinaldata);
+                        }
              }
+
+             if(dataSet == "Error"){
+                 this.props.getAlphaData(currentScripName,primaryid );
+                 detectStatus = false;
+
+             }
+
+             
 
              
 
@@ -1090,7 +1103,7 @@ lifeBetterEntryCriticalLevel= 0;
                     "stop": stop,
                     "target": target,
                     "shift": shift,
-                    "open": v.open,
+                    "open": parseFloat(v.open),
                     "low": parseFloat(v.low),
                     "high": parseFloat(v.high),
                     "close": parseFloat(v.close),
@@ -1102,9 +1115,6 @@ lifeBetterEntryCriticalLevel= 0;
                     'netProfit' : crudeNetProfit,
                     'name' : currentScripName[0],
                     'hasTradeStarted' : tradeDateStartedDate
-
-                   // 'testHour' : v.Local.split(' ')[1].split(':')[0],
-                    // 'Local' : v.Local,
                 };
 
 
@@ -3187,7 +3197,7 @@ checkArg(0);
 
 
 
-            <
+            /*<
             div class = "row" >
             1 {
                 (this.props.tickCombo != undefined && this.props.tickCombo.length >= 1) ?
@@ -3210,33 +3220,9 @@ checkArg(0);
                 :
                 ''
             } <
-            /div>
+            /div>*/
 
            
-
-            <
-            div class = "row" > {
-                (this.props.tickDataJD != undefined && this.props.tickDataJD.length >= 1) ?
-                < div class = "col-md-3" > < KitePlot title = "justdial"
-                plotdata = {
-                    this.props.tickDataJD
-                }
-                /> </div >
-                :
-                    ''
-            }
-
-            {
-                (this.props.trendDataNifty != undefined && this.props.trendDataNifty.length >= 1) ?
-                < div class = "col-md-8" > < LineApp title = "justdial"
-                plotdata = {
-                    this.props.tickDataJD
-                }
-                /></div >
-                :
-                ''
-            } <
-            /div>
 
 
 

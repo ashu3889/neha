@@ -27,6 +27,7 @@ return function(dispatch) {
 
       })
       .catch((error) => {
+        dispatch({type: 'DATA_NOT_OBTAINED',payload: 'Error'});
         console.log("Error Response"+error);
        
       });
